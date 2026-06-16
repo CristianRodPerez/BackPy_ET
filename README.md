@@ -1,78 +1,116 @@
-# Backend 2 - Product Service
+# BackPy_ET - Product Service
 
-Backend en Python (Flask) para gestión de productos con base de datos MySQL.
+Microservicio desarrollado en Python Flask para la gestión de productos.
 
-## Características
+## Tecnologías
 
-- API REST para gestión de productos
-- CRUD completo de productos
-- Búsqueda por nombre, precio y stock
-- Base de datos MySQL
-- Configuración vía archivo .env
+* Python 3.11
+* Flask
+* MariaDB/MySQL
+* Docker
+* Amazon ECS Fargate
+* Amazon ECR
+* GitHub Actions
 
-## Requisitos
+## Funcionalidades
 
-- Python 3.8 o superior
-- MySQL 8.0 o superior
-- pip
+* CRUD de productos
+* Consulta por nombre
+* Consulta por precio
+* Consulta por stock
+* Persistencia en base de datos relacional
 
 ## Configuración
 
-1. Copiar el archivo de ejemplo:
-```bash
-cp .env.example .env
-```
+Variables de entorno:
 
-2. Editar `.env` con sus credenciales de MySQL:
-```
-DB_HOST=localhost
+```env
+DB_HOST=
 DB_PORT=3306
-DB_USER=root
-DB_PASSWORD=tu_password
+DB_USER=
+DB_PASSWORD=
 DB_NAME=products_db
 PORT=8082
 ```
 
-3. Crear la base de datos en MySQL:
-```sql
-CREATE DATABASE products_db;
-```
+## Docker
 
-## Instalación
+Construcción local:
 
 ```bash
-pip install -r requirements.txt
+docker build -t backpy-et .
 ```
 
-## Ejecutar
+Ejecución:
 
 ```bash
-python app.py
+docker run -p 8082:8082 backpy-et
 ```
-
-El servidor iniciará en el puerto 8082.
 
 ## Endpoints
 
-- `POST /api/products` - Crear nuevo producto
-- `GET /api/products` - Obtener todos los productos
-- `GET /api/products/{id}` - Obtener producto por ID
-- `GET /api/products/search?name=xxx` - Buscar productos por nombre
-- `GET /api/products/search?minPrice=xxx&maxPrice=yyy` - Buscar por rango de precio
-- `GET /api/products/search?minStock=xxx` - Buscar por stock mínimo
-- `PUT /api/products/{id}` - Actualizar producto
-- `DELETE /api/products/{id}` - Eliminar producto
+### Obtener productos
 
-## Ejemplo de Uso
-
-Crear producto:
-```bash
-curl -X POST http://localhost:8082/api/products \
-  -H "Content-Type: application/json" \
-  -d '{"name":"Laptop HP","description":"Laptop de 15.6 pulgadas","price":899.99,"stock":15,"icon":"💻"}'
+```http
+GET /api/products
 ```
 
-Obtener productos:
-```bash
-curl http://localhost:8082/api/products
+### Crear producto
+
+```http
+POST /api/products
 ```
+
+### Actualizar producto
+
+```http
+PUT /api/products/:id
+```
+
+### Eliminar producto
+
+```http
+DELETE /api/products/:id
+```
+
+## CI/CD
+
+Pipeline automatizado mediante GitHub Actions:
+
+1. Checkout.
+2. Configuración de credenciales AWS.
+3. Login en ECR.
+4. Build Docker.
+5. Push automático a ECR.
+
+Archivo:
+
+```text
+.github/workflows/deploy.yml
+```
+
+## AWS
+
+Servicios utilizados:
+
+* Amazon ECS Fargate
+* Amazon ECR
+* CloudWatch Logs
+* IAM
+
+## Seguridad
+
+* Uso de variables de entorno.
+* Gestión de credenciales mediante GitHub Secrets.
+* Exposición únicamente del puerto 8082.
+* Registro centralizado mediante CloudWatch Logs.
+
+## Observabilidad
+
+La aplicación genera logs visibles desde:
+
+```text
+AWS CloudWatch Logs
+```
+
+para monitoreo y diagnóstico de errores en producción.
