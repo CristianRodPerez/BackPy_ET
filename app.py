@@ -56,7 +56,7 @@ def init_db():
                 ("Auriculares Sony WH-1000XM4", "Auriculares inalámbricos con cancelación de ruido", 349.99, 30, "🎧"),
                 ("Tablet iPad Air", "Apple iPad Air 5ta generación, 64GB, Wi-Fi", 599.99, 20, "📲"),
                 ("Smartwatch Apple Watch", "Apple Watch Series 8, GPS, 45mm", 449.99, 18, "⌚"),
-                ("Cámara Canon EOS", "Cámara DSLR Canon EOS Rebel T7, 24.1MP", 549.99, 12, "📷"),
+                ("Cámara Canon EOS a", "Cámara DSLR Canon EOS Rebel T7, 24.1MP", 549.99, 12, "📷"),
                 ("Consola PlayStation 5", "Sony PlayStation 5, 825GB SSD, con control DualSense", 499.99, 8, "🎮"),
                 ("Monitor Dell UltraSharp", "Monitor Dell 27 pulgadas 4K, IPS, USB-C", 429.99, 22, "🖥️")
             ]
